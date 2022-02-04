@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/style_dashboard.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav_link">
+                <li><a href="/dashboard">Dashoboard</a></li>
+                <li><a href="https://share.streamlit.io/cristian-aq/prueba_bi/main/app.py">Modelos</a></li>
+            </ul>
+        </nav>
+        <a href="/logout"><button>LOGOUT</button></a>
+    </header>
+    <div class="titulo">
+        <h1>Sistema de prediccion de compra y venta de acciones</h1>
+    </div>
+    <div class="contenedor">
+        <div class="form">
+            <form action="/predict" method="post">
+                <select name="business" id="">
+                    <option selected>Seleccione una empresa</option>
+                    <option value="0">Apple</option>
+                    <option value="1">Coca Cola</option>
+                    <option value="2">Facebook</option>
+                    <option value="3">Tesla</option>
+                    <option value="4">Microsoft</option>
+                </select>
+                <input type="text" name="open" placeholder="Open">
+                <input type="text" name="high" placeholder="High">
+                <input type="text" name="low" placeholder="Low">
+                <input type="text" name="close" placeholder="Close">
+                <input type="submit" value="Prediccion">
+            </form>
+            {% with messages = get_flashed_messages() %}  
+                {% if messages %}
+                    {% for mensaje in messages %}
+                        <h3>{{ mensaje }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="tradingview-widget-container">
+            <div id="tradingview_09369"></div>
+            <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/symbols/BME-SAN/" rel="noopener" target="_blank"><span class="blue-text">SAN Gráfico</span></a> por TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+            new TradingView.widget(
+            {
+            "width": 980,
+            "height": 610,
+            "symbol": "BME:SAN",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "es",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_09369"
+        }
+            );
+            </script>
+        </div>
+    </div>
+</body>
+</html>

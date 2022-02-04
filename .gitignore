@@ -1,5 +1,5 @@
-# cache
+# no se almacena el cache generado
 __pycache__/
 
-# entorno virtual
+# no se almacena el entorno virtual al github
 env/
